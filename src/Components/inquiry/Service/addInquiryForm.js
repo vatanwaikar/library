@@ -1,67 +1,69 @@
 // addInquiryForm.js
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 // Create Inquiry
 export async function createInquiry(formData) {
-  const response = await fetch('http://localhost:8103/createInquiry', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  const res = await fetch(`${BASE_URL}/createInquiry`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
-  if (!response.ok) throw new Error('Failed to create inquiry');
-  return response.json();
+  if (!res.ok) throw new Error("Failed to create inquiry");
+  return res.json();
 }
 
 // Get All Inquiries
 export async function getAllInquiries() {
-  const response = await fetch('http://localhost:8103/getAllInquiries');
-  if (!response.ok) throw new Error('Failed to fetch inquiries');
-  return response.json();
+  const res = await fetch(`${BASE_URL}/getAllInquiries`);
+  if (!res.ok) throw new Error("Failed to fetch inquiries");
+  return res.json();
 }
 
-// Get Inquiry By Id
+// Get Inquiry By ID
 export async function getInquiryById(id) {
-  const response = await fetch(`http://localhost:8103/getInquiryById/${id}`);
-  if (!response.ok) throw new Error('Failed to fetch inquiry');
-  return response.json();
+  const res = await fetch(`${BASE_URL}/getInquiryById/${id}`);
+  if (!res.ok) throw new Error("Failed to fetch inquiry");
+  return res.json();
 }
 
 // Update Inquiry
 export async function updateInquiry(id, formData) {
-  const response = await fetch(`http://localhost:8103/updateInquiry/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+  const res = await fetch(`${BASE_URL}/updateInquiry/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
-  if (!response.ok) throw new Error('Failed to update inquiry');
-  return response.json();
+  if (!res.ok) throw new Error("Failed to update inquiry");
+  return res.json();
 }
 
 // Delete Inquiry
 export async function deleteInquiry(id) {
-  const response = await fetch(`http://localhost:8103/deleteInquiry/${id}`, {
-    method: 'DELETE',
+  const res = await fetch(`${BASE_URL}/deleteInquiry/${id}`, {
+    method: "DELETE",
   });
-  if (!response.ok) throw new Error('Failed to delete inquiry');
-  return response;
+  if (!res.ok) throw new Error("Failed to delete inquiry");
+  return res.text(); // or `res.json()` if your API returns JSON
 }
 
 // Get Monthly Inquiry Count
 export async function getMonthlyInquiryCount(year, month) {
-  const response = await fetch(`http://localhost:8103/getMonthlyInquiryCount?year=${year}&month=${month}`);
-  if (!response.ok) throw new Error('Failed to fetch monthly inquiry count');
-  return response.json();
+  const res = await fetch(`${BASE_URL}/getMonthlyInquiryCount?year=${year}&month=${month}`);
+  if (!res.ok) throw new Error("Failed to fetch monthly inquiry count");
+  return res.json();
 }
 
 // Get Daily Inquiry Counts
 export async function getDailyInquiryCounts(year, month) {
-  const response = await fetch(`http://localhost:8103/getDailyInquiryCounts?year=${year}&month=${month}`);
-  if (!response.ok) throw new Error('Failed to fetch daily inquiry counts');
-  return response.json();
+  const res = await fetch(`${BASE_URL}/getDailyInquiryCounts?year=${year}&month=${month}`);
+  if (!res.ok) throw new Error("Failed to fetch daily inquiry counts");
+  return res.json();
 }
 
-// Get Inquiry Counts
+// Get Overall Inquiry Counts (e.g. today, this week, this month etc.)
 export async function getInquiryCounts() {
-  const response = await fetch('http://localhost:8103/getInquiryCounts');
-  if (!response.ok) throw new Error('Failed to fetch inquiry counts');
-  return response.json();
+  const res = await fetch(`${BASE_URL}/getInquiryCounts`);
+  if (!res.ok) throw new Error("Failed to fetch inquiry counts");
+  return res.json();
 }

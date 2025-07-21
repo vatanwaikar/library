@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:8103";
+// const BASE_URL = "http://localhost:8103";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 export async function getAllStudySources() {
   const res = await fetch(`${BASE_URL}/getAllStudySources`);
